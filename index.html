@@ -5,59 +5,41 @@
 </head>
 <body>
 <div id="app">
-<!--    <my-cmp></my-cmp>-->
-<!--    <my-component></my-component>-->
-    <header>
-        <h3>{{message}}</h3>
-    </header>
-    <todo-list></todo-list>
-    <todo-footer></todo-footer>
+    <my-component1></my-component1>
+    <my-component2></my-component2>
+    <!-- {{cmp2Data}}에 아무 값도 출력되지 않은 이유는 my-component2에서 my-component1의 값을 직접 참조할 수 있기 때문이다. 유효 범위가 다르므로 접근할 수 없다. -->
+
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-    //전역 컴포넌트 등록
-    // Vue.component('my-component',{
-    //     template : "<div>A custom static component!</div>"
-    // })
-    //
-    // new Vue({
-    //     el: "#app",
-    // });
-
-    // 지역 컴포넌트 등록
-    // const cmp = {
-    //     // 컴포넌트 내용
-    //     template: "<div>A custom local component!</div>",
-    // }
-    //
-    // new Vue({
-    //     el: "#app",
-    //     components: {
-    //         'my-cmp' : cmp
-    //     }
-    // })
-
-    Vue.component('todo-footer',{
-        template : '<p>This is another global child component</p>'
-    })
-
-    const toDoList = {
-        template : "<p>This is another local child component</p>"
+<script >
+    const cmp1 = {
+        template: '<div>first component : {{cmp1Data}}</div>',
+        data: function (){
+            return {
+                cmp1Data: 100
+            }
+        }
     }
 
-    const app = new Vue({
-        el: '#app',
-        data:{
-            message: 'This is a parent component'
-        },
-        components:{
-            "todo-list" : toDoList
+    const cmp2 = {
+        template: '<div>second component : {{cmp2Data}}</div>',
+        data: function (){
+            return {
+                cmp2Data: cmp1.data.cmp1Data
+            }
+        }
+    }
+
+    new Vue({
+        el : '#app',
+        components : {
+            'my-component1' : cmp1,
+            'my-component2' : cmp2
         }
     })
 
-
 </script>
+
 </body>
 </html>
