@@ -5,7 +5,8 @@
 </head>
 <body>
 <div id="app">
-    <child-component v-on:show-log="printText"></child-component>
+    <child-component></child-component>
+<!--    <child-component v-on:show-log="printText"></child-component>-->
 <!--    <child-component v-bind:propsdata="message"></child-component>-->
 <!--    <my-component1></my-component1>-->
 <!--    <my-component2></my-component2>-->
@@ -53,24 +54,44 @@
     //         message: "Hello vue! passed from Parent Component"
     //     }
     // })
+    // Vue.component('child-component', {
+    //     template: '<button v-on:click="showLog">show</button>',
+    //     methods:{
+    //         showLog : function(){
+    //             this.$emit('show-log')
+    //         }
+    //     }
+    // })
+    //
+    // new Vue({
+    //     el: "#app",
+    //     data : {
+    //         message: "Hello vue! passed from Parent Component"
+    //     },
+    //     methods:{
+    //         printText: function (){
+    //             console.log("received an event");
+    //         }
+    //     }
+    // })
+
+
+    const eventBus = new Vue();
     Vue.component('child-component', {
-        template: '<button v-on:click="showLog">show</button>',
+        template: '<div> under level component <button v-on:click="showLog">show</button> </div>',
         methods:{
             showLog : function(){
-                this.$emit('show-log')
+                eventBus.$emit('triggerEventBus',100)
             }
         }
     })
 
     new Vue({
         el: "#app",
-        data : {
-            message: "Hello vue! passed from Parent Component"
-        },
-        methods:{
-            printText: function (){
-                console.log("received an event");
-            }
+        created: function (){
+            eventBus.$on('triggerEventBus', function(value){
+                console.log(`이벤트로 전달 받은 값 ${value}`)
+            })
         }
     })
 </script>
