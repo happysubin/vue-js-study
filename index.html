@@ -5,22 +5,35 @@
 </head>
 <body>
 <div id="app">
+<!--    <my-cmp></my-cmp>-->
     <my-component></my-component>
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
+    //전역 컴포넌트 등록
+    Vue.component('my-component',{
+        template : "<div>A custom static component!</div>"
+    })
+
     new Vue({
         el: "#app",
-        // 컴포넌트 등록 코드
-        components: {
-            // '컴포넌트 이름': 컴포넌트 내용
-            "my-component": {
-                template: "<div>A custom component!</div>"
-            }
-        }
     });
+
+    // 지역 컴포넌트 등록
+    // const cmp = {
+    //     // 컴포넌트 내용
+    //     template: "<div>A custom local component!</div>",
+    // }
+    //
+    // new Vue({
+    //     el: "#app",
+    //     components: {
+    //         'my-cmp' : cmp
+    //     }
+    // })
+
 
 </script>
 </body>
