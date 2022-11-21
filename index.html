@@ -5,23 +5,26 @@
 </head>
 <body>
 <div id="app">
-    <h1>Vue Named View Example</h1>
     <router-view name = "header"></router-view>
     <router-view></router-view>
     <router-view name = "footer"></router-view>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
 
     <script >
+
         const body = {template : '<div>This is a Body</div>'}
         const header = {template : '<div>This is a Header</div>'}
         const footer = {template : '<div>This is a Footer</div>'}
 
+        const loginBody = {template : '<div>This is a LoginBody</div>'}
+        const loginHeader = {template : '<div>This is a Login Header</div>'}
+        const loginFooter = {template : '<div>This is a Login Footer</div>'}
+
         const router = new VueRouter({
-            routes : [
+            routes: [
                 {
                     path : '/',
                     components : {
@@ -29,15 +32,21 @@
                         header : header,
                         footer : footer
                     }
+                },
+                {
+                    path : '/login',
+                    components: {
+                        default : loginBody,
+                        header : loginHeader,
+                        footer : loginFooter
+                    }
                 }
             ]
         })
 
         new Vue({
             router
-        }).$mount('#app') //mount는 el과 동일한 역할
-
-        //네임드 뷰를 활용하면 특정 페이지로 이동했을 때 해당 URL에 맞추어 여러 개의 컴포넌트를 한 번에 표시할 수 있다.
+        }).$mount('#app')
     </script>
 
 </body>
