@@ -1,52 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Vue Router Sample</title>
+    <title>Vue with Axios Sample</title>
 </head>
 <body>
 <div id="app">
-    <router-view name = "header"></router-view>
-    <router-view></router-view>
-    <router-view name = "footer"></router-view>
+    <button v-on:click="getData"> 프레임워크 목록 가져오기 </button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
     <script >
 
-        const body = {template : '<div>This is a Body</div>'}
-        const header = {template : '<div>This is a Header</div>'}
-        const footer = {template : '<div>This is a Footer</div>'}
-
-        const loginBody = {template : '<div>This is a LoginBody</div>'}
-        const loginHeader = {template : '<div>This is a Login Header</div>'}
-        const loginFooter = {template : '<div>This is a Login Footer</div>'}
-
-        const router = new VueRouter({
-            routes: [
-                {
-                    path : '/',
-                    components : {
-                        default : body,
-                        header : header,
-                        footer : footer
-                    }
-                },
-                {
-                    path : '/login',
-                    components: {
-                        default : loginBody,
-                        header : loginHeader,
-                        footer : loginFooter
-                    }
+        new Vue({
+            el : '#app',
+            methods: {
+                getData: function(){
+                    axios.get('https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json')
+                        .then(function(response){
+                            console.log(response)
+                        })
                 }
-            ]
+            }
         })
 
-        new Vue({
-            router
-        }).$mount('#app')
     </script>
 
 </body>
