@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Vue Components Registration Quiz</title>
+    <title>Vue Router Sample</title>
 </head>
 <body>
 <div id="app">
-    <silbing-component v-bind:silbing-props-data="anotherMessage"></silbing-component>
-    <child-component v-bind:props-data="message"></child-component>
+    <h1>Vue Router Example</h1>
+    <p>
+        <router-link to="/main"> Move to Main Component  </router-link>
+        <router-link to="/login"> Move to Login Component  </router-link>
+    </p>
+    <router-view></router-view>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script >
-    Vue.component('silbing-component',{
-        props:['silbingPropsData'],
-        template : "<div>{{silbingPropsData}}<</div>"
-    })
+<script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
 
-    Vue.component('child-component', {
-        props: ['propsData'],
-        template : '<p>{{propsData}}</p>'
-    })
+    <script >
+        const main = {template : '<div>main</div>'}
+        const login = {template : '<div>login</div>'}
 
-    new Vue({
-        el : '#app',
-        data : {
-            message : 'Hello Vue! passed from Parent Component',
-            anotherMessage : "This is another message"
-        }
-    })
+        const routes = [
+            {path : '/main', component : main},
+            {path : '/login', component: login}
+        ]
 
+        const router = new VueRouter({
+            routes
+        })
 
-</script>
+        new Vue({
+            router
+        }).$mount('#app') //mount는 el과 동일한 역할
+
+    </script>
 
 </body>
 </html>
