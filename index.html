@@ -5,95 +5,31 @@
 </head>
 <body>
 <div id="app">
-    <child-component></child-component>
-<!--    <child-component v-on:show-log="printText"></child-component>-->
-<!--    <child-component v-bind:propsdata="message"></child-component>-->
-<!--    <my-component1></my-component1>-->
-<!--    <my-component2></my-component2>-->
-    <!-- {{cmp2Data}}에 아무 값도 출력되지 않은 이유는 my-component2에서 my-component1의 값을 직접 참조할 수 있기 때문이다. 유효 범위가 다르므로 접근할 수 없다. -->
-
+    <silbing-component v-bind:silbing-props-data="anotherMessage"></silbing-component>
+    <child-component v-bind:props-data="message"></child-component>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script >
+    Vue.component('silbing-component',{
+        props:['silbingPropsData'],
+        template : "<div>{{silbingPropsData}}<</div>"
+    })
 
-    // const cmp1 = {
-    //     template: '<div>first component : {{cmp1Data}}</div>',
-    //     data: function (){
-    //         return {
-    //             cmp1Data: 100
-    //         }
-    //     }
-    // }
-    //
-    // const cmp2 = {
-    //     template: '<div>second component : {{cmp2Data}}</div>',
-    //     data: function (){
-    //         return {
-    //             cmp2Data: cmp1.data.cmp1Data
-    //         }
-    //     }
-    // }
-    //
-    // new Vue({
-    //     el : '#app',
-    //     components : {
-    //         'my-component1' : cmp1,
-    //         'my-component2' : cmp2
-    //     }
-    // })
-
-    // Vue.component('child-component', {
-    //     props: ['propsdata'],
-    //     template: '<p>{{propsdata}}</p>'
-    // })
-    //
-    // new Vue({
-    //     el: "#app",
-    //     data : {
-    //         message: "Hello vue! passed from Parent Component"
-    //     }
-    // })
-    // Vue.component('child-component', {
-    //     template: '<button v-on:click="showLog">show</button>',
-    //     methods:{
-    //         showLog : function(){
-    //             this.$emit('show-log')
-    //         }
-    //     }
-    // })
-    //
-    // new Vue({
-    //     el: "#app",
-    //     data : {
-    //         message: "Hello vue! passed from Parent Component"
-    //     },
-    //     methods:{
-    //         printText: function (){
-    //             console.log("received an event");
-    //         }
-    //     }
-    // })
-
-
-    const eventBus = new Vue();
     Vue.component('child-component', {
-        template: '<div> under level component <button v-on:click="showLog">show</button> </div>',
-        methods:{
-            showLog : function(){
-                eventBus.$emit('triggerEventBus',100)
-            }
-        }
+        props: ['propsData'],
+        template : '<p>{{propsData}}</p>'
     })
 
     new Vue({
-        el: "#app",
-        created: function (){
-            eventBus.$on('triggerEventBus', function(value){
-                console.log(`이벤트로 전달 받은 값 ${value}`)
-            })
+        el : '#app',
+        data : {
+            message : 'Hello Vue! passed from Parent Component',
+            anotherMessage : "This is another message"
         }
     })
+
+
 </script>
 
 </body>
