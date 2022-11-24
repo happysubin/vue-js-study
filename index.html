@@ -2,50 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Vue with Axios Sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="src/assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="src/assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <title>Vue.js Todo</title>
 </head>
 <body>
 <div id="app">
-    <p>{{message}}</p>
-    <p>{{bean}}</p>
-    <p v-bind:id="uid">uid</p>
-    <button v-on:click="clickBtn">alert</button>
-    <button v-on:click="listenClick">alert</button>
-
-    <ul v-if="flag">
-        <li>1</li>
-    </ul>
-
-
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-
-    <script >
-
-        new Vue({
-            el : '#app',
-            data : {
-                message : "Hello Vue JS",
-                bean : "Bean",
-                uid : "10",
-                flag : false
-            },
-            methods : {
-                clickBtn: function(){
-                    console.log("hi")
-                },
-                listenClick: function(event){
-                    console.log(event)
-                }
-            }
-
-        })
-
-    </script>
-
 </body>
 </html>
