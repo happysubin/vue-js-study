@@ -5,7 +5,9 @@
 </head>
 <body>
 <div id="app">
-    <button v-on:click="getData"> 프레임워크 목록 가져오기 </button>
+    <p v-bind:id="idA">id</p>
+    <p v-bind:class="classA">class</p>
+    <p v-bind:style="styleA">style</p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -18,10 +20,10 @@
         new Vue({
             el : '#app',
             data : {
-                message : 'Hello Vue. JS',
-                message2 : "Level 2"
+                idA: 10,
+                classA : 'container',
+                styleA : 'color: blue'
             },
-            template : '<h3>{{message}}</h3>'
         })
 
     </script>
