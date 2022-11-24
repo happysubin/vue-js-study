@@ -6,14 +6,13 @@
 </head>
 <body>
 <div id="app">
-    <p v-bind:id="idA">id</p>
-    <p v-bind:class="classA">class</p>
-    <p v-bind:style="styleA">style</p>
-    <p>{{message + "!!!!"}}</p>
-    <p>{{message.split("").reverse().join('')}}</p>
-    <p>자바 스크립트 표현식 사용할 때 자바 스크립트 선언문과 분기 구문은 사용할 수 없다.</p>
-    <p>복잡한 연산은 인스턴스 안에서 처리하고 화면에는 간단한 연산 결과만 표시하자.</p>
-    <p>{{reversedMessage}}</p>
+    <a v-if="flag">Vue JS</a>
+    <ul>
+        <li v-for="system in systems">{{system}}</li>
+    </ul>
+    <p v-show="flag">Vue JS</p>
+    <h5 v-bind:id="uid">뷰 입문</h5>
+    <button v-on:click="popupAlert">경고 창 버튼</button>
 
 </div>
 
@@ -27,14 +26,13 @@
         new Vue({
             el : '#app',
             data : {
-                idA: 10,
-                classA : 'container',
-                styleA : 'color: blue',
-                message : "Message"
+                flag: true,
+                systems : ['java', 'spring', 'jpa', 'kotlin'],
+                uid : 10
             },
-            computed:{
-                reversedMessage:function(){
-                    return this.message.split('').reverse().join('');
+            methods : {
+                popupAlert: function(){
+                    return alert("경고 창!")
                 }
             }
         })
