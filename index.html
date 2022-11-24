@@ -6,7 +6,16 @@
 </head>
 <body>
 <div id="app">
-    <input v-model="message">
+    <p>{{message}}</p>
+    <p>{{bean}}</p>
+    <p v-bind:id="uid">uid</p>
+    <button v-on:click="clickBtn">alert</button>
+    <button v-on:click="listenClick">alert</button>
+
+    <ul v-if="flag">
+        <li>1</li>
+    </ul>
+
 
 </div>
 
@@ -20,13 +29,20 @@
         new Vue({
             el : '#app',
             data : {
-                message : "Hello Vue JS"
+                message : "Hello Vue JS",
+                bean : "Bean",
+                uid : "10",
+                flag : false
             },
-            watch : {
-                message : function(data){
-                    console.log("message의 값이 바뀝니다 : ", data)
+            methods : {
+                clickBtn: function(){
+                    console.log("hi")
+                },
+                listenClick: function(event){
+                    console.log(event)
                 }
             }
+
         })
 
     </script>
