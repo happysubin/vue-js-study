@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Vue with Axios Sample</title>
 </head>
 <body>
@@ -8,6 +9,12 @@
     <p v-bind:id="idA">id</p>
     <p v-bind:class="classA">class</p>
     <p v-bind:style="styleA">style</p>
+    <p>{{message + "!!!!"}}</p>
+    <p>{{message.split("").reverse().join('')}}</p>
+    <p>자바 스크립트 표현식 사용할 때 자바 스크립트 선언문과 분기 구문은 사용할 수 없다.</p>
+    <p>복잡한 연산은 인스턴스 안에서 처리하고 화면에는 간단한 연산 결과만 표시하자.</p>
+    <p>{{reversedMessage}}</p>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -22,8 +29,14 @@
             data : {
                 idA: 10,
                 classA : 'container',
-                styleA : 'color: blue'
+                styleA : 'color: blue',
+                message : "Message"
             },
+            computed:{
+                reversedMessage:function(){
+                    return this.message.split('').reverse().join('');
+                }
+            }
         })
 
     </script>
