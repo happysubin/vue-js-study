@@ -1,7 +1,7 @@
 <template>
   <section>
     <ul>
-      <li v-for="(todoItem, index) in todoItems"  :key="todoItem" class="shadow">
+      <li v-for="(todoItem, index) in propsdata" class="shadow">
         <i class="checkBtn fa fa-check" aria-hidden="true"></i>
         {{todoItem}}
         <span class="removeBtn" type="Button" @click="removeTodo(todoItem, index)"> <!-- @click와 v-on:click는 동일 -->
@@ -15,22 +15,10 @@
 
 <script>
 export default{
-  data(){
-    return {
-      todoItems : []
-    }
-  },
-  created(){ //라이프 사이클 훅
-     if(localStorage.length > 0){
-       for (let i = 0; i < localStorage.length; i++){
-         this.todoItems.push(localStorage.key(i))
-       }
-     }
-  },
+  props: ['propsdata'],
   methods:{
     removeTodo(todoItem, index){
-      localStorage.removeItem(todoItem)
-      this.todoItems.splice(index, 1)
+      this.$emit('removeTodo', todoItem, index) //emit 메서드. 이벤트, 인자1, 인자2. 전달받은 인자 값은 상위 컴포넌트에서 변경하면 안된다. 하위 컴포넌트에 반영이 안되기 때문
     }
   }
 }

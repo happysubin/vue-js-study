@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoInput v-on:addTodo="addTodo"></TodoInput>
+    <TodoList v-bind:propsdata="todoItems" @removeTodo="removeTodo"></TodoList>
+    <TodoFooter v-on:removeAll="clearAll"></TodoFooter> <!--TodoFooter에서 발생시킬 이벤트 이름이 removeAll -->
   </div>
 </template>
 
@@ -14,6 +14,32 @@ import TodoList from "./components/TodoList.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 
 export default{
+  data(){
+    return {
+      todoItems : []
+    }
+  },
+  created(){ //라이프 사이클 훅
+    if(localStorage.length > 0){
+      for (let i = 0; i < localStorage.length; i++){
+        this.todoItems.push(localStorage.key(i))
+      }
+    }
+  },
+  methods:{
+    addTodo(todoItem){
+      localStorage.setItem(this.todoItems, todoItem)
+      this.todoItems.push(todoItem)
+    },
+    clearAll(){
+      localStorage.clear()
+      this.todoItems = []
+    },
+    removeTodo(todoItem, index){
+      localStorage.removeItem(todoItem)
+      this.todoItems.splice(index, 1)
+    }
+  },
   components:{
     'TodoHeader' : TodoHeader,
     'TodoInput' : TodoInput,
