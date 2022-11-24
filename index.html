@@ -6,15 +6,8 @@
 </head>
 <body>
 <div id="app">
-    <a v-if="flag">Vue JS</a>
-    <ul>
-        <li v-for="system in systems">{{system}}</li>
-    </ul>
-    <p v-show="flag">Vue JS</p>
-    <h5 v-bind:id="uid">뷰 입문</h5>
-    <button v-on:click="popupAlert(10)">경고 창 버튼</button>
-    <button v-on:click="popup">이벤트 출력 버튼</button>
-
+    <p>{{message}}</p>
+    <button v-on:click="reverseMsg">문자열 역순</button>
 
 </div>
 
@@ -28,16 +21,12 @@
         new Vue({
             el : '#app',
             data : {
-                flag: true,
-                systems : ['java', 'spring', 'jpa', 'kotlin'],
-                uid : 10
+                message : "Hello Vue JS"
             },
             methods : {
-                popupAlert: function(num){
-                    return alert("경고 창!" + num)
-                },
-                popup:function(event){
-                    console.log(event)
+                reverseMsg:function(){
+                    this.message = this.message.split("").reverse().join('');
+                    return this.message
                 }
             }
         })
