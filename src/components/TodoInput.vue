@@ -5,27 +5,48 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="addBtn fa fa-plus" aria-hidden="true"></i>
     </span>
+
+    <modal v-if="showModal" @close="showModal = false">
+      <template v-slot:header>경고</template>
+      <template v-slot:footer @click="showModal = false"> <!--vue js 3부터는 slot 속성이 사라졌다고 한다. v-slot는 템플릿 태그 안에서만 사용 가능 -->
+        할 일을 입력하세요.
+        <i class="closeModalBtn fas fa-times" aria-hidden="true"></i>
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
+import Modal from "./common/Modal.vue"
+
+
 export default{
   data(){
     return {
-      newTodoItem : ''
+      newTodoItem : '',
+      showModal: false
     }
   },
   methods:{
     addTodo(){
-      if(this.newTodoItem != ""){
+      if(this.newTodoItem !== ""){
         const value = this.newTodoItem && this.newTodoItem.trim()
         this.$emit('addTodo', value);
         this.clearInput();
       }
+      else{
+        this.showModal = !this.showModal
+      }
     },
     clearInput(){
       this.newTodoItem = ''
+    },
+    close(){
+      console.log("close")
     }
+  },
+  components: {
+    Modal: Modal
   }
 }
 </script>
